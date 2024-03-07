@@ -1,11 +1,11 @@
-import { App } from 'vue';
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { RedirectRoute } from '@/router/base';
-import { PageEnum } from '@/enums/pageEnum';
-import { createRouterGuards } from './guards';
-import type { IModuleType } from './types';
+import { App } from "vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { RedirectRoute } from "@/router/base";
+import { PageEnum } from "@/enums/pageEnum";
+import { createRouterGuards } from "./guards";
+import type { IModuleType } from "./types";
 
-const modules = import.meta.glob<IModuleType>('./modules/**/*.ts', { eager: true });
+const modules = import.meta.glob<IModuleType>("./modules/**/*.ts", { eager: true });
 
 const routeModuleList: RouteRecordRaw[] = Object.keys(modules).reduce((list, key) => {
   const mod = modules[key].default ?? {};
@@ -20,20 +20,20 @@ function sortRoute(a, b) {
 routeModuleList.sort(sortRoute);
 
 export const RootRoute: RouteRecordRaw = {
-  path: '/',
-  name: 'Root',
+  path: "/",
+  name: "Root",
   redirect: PageEnum.BASE_HOME,
   meta: {
-    title: 'Root',
+    title: "Root",
   },
 };
 
 export const LoginRoute: RouteRecordRaw = {
-  path: '/login',
-  name: 'Login',
-  component: () => import('@/views/login/index.vue'),
+  path: "/login",
+  name: "Login",
+  component: () => import("@/views/login/index.vue"),
   meta: {
-    title: '登录',
+    title: "登入",
   },
 };
 

@@ -1,9 +1,9 @@
-import logoImage from '@/assets/images/logo.png';
-import loginImage from '@/assets/images/account-logo.png';
+import logoImage from "@/assets/images/logo.png";
+import loginImage from "@/assets/images/account-logo.png";
 
 export const websiteConfig = Object.freeze({
-  title: 'NaiveUiAdmin',
+  title: "點起來",
   logo: logoImage,
-  loginImage: loginImage,
-  loginDesc: 'Naive Ui Admin中后台前端/设计解决方案',
+  loginImage: logoImage,
+  loginDesc: "不知道吃甚麼的解決方案",
 });

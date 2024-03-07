@@ -5,9 +5,19 @@
       class="layout-header-left"
       v-if="navMode === 'horizontal' || (navMode === 'horizontal-mix' && mixMenu)"
     >
-      <div class="logo" v-if="navMode === 'horizontal'">
-        <img :src="websiteConfig.logo" alt="" />
-        <h2 v-show="!collapsed" class="title">{{ websiteConfig.title }}</h2>
+      <div
+        class="logo"
+        v-if="navMode === 'horizontal'"
+      >
+        <img
+          :src="websiteConfig.logo"
+          alt=""
+        />
+        <h2
+          v-show="!collapsed"
+          class="title"
+          >{{ websiteConfig.title }}</h2
+        >
       </div>
       <AsideMenu
         v-model:collapsed="collapsed"
@@ -17,16 +27,25 @@
       />
     </div>
     <!--左侧菜单-->
-    <div class="layout-header-left" v-else>
+    <div
+      class="layout-header-left"
+      v-else
+    >
       <!-- 菜单收起 -->
       <div
         class="ml-1 layout-header-trigger layout-header-trigger-min"
         @click="() => $emit('update:collapsed', !collapsed)"
       >
-        <n-icon size="18" v-if="collapsed">
+        <n-icon
+          size="18"
+          v-if="collapsed"
+        >
           <MenuUnfoldOutlined />
         </n-icon>
-        <n-icon size="18" v-else>
+        <n-icon
+          size="18"
+          v-else
+        >
           <MenuFoldOutlined />
         </n-icon>
       </div>
@@ -60,7 +79,10 @@
                 {{ routeItem.meta.title }}
               </span>
             </n-dropdown>
-            <span class="link-text" v-else>
+            <span
+              class="link-text"
+              v-else
+            >
               <component
                 v-if="crumbsSetting.showIcon && routeItem.meta.icon"
                 :is="routeItem.meta.icon"
@@ -80,7 +102,10 @@
         <n-tooltip placement="bottom">
           <template #trigger>
             <n-icon size="18">
-              <component :is="item.icon" v-on="item.eventObject || {}" />
+              <component
+                :is="item.icon"
+                v-on="item.eventObject || {}"
+              />
             </n-icon>
           </template>
           <span>{{ item.tips }}</span>
@@ -91,7 +116,10 @@
         <n-tooltip placement="bottom">
           <template #trigger>
             <n-icon size="18">
-              <component :is="fullscreenIcon" @click="toggleFullScreen" />
+              <component
+                :is="fullscreenIcon"
+                @click="toggleFullScreen"
+              />
             </n-icon>
           </template>
           <span>全屏</span>
@@ -99,7 +127,11 @@
       </div>
       <!-- 个人中心 -->
       <div class="layout-header-trigger layout-header-trigger-min">
-        <n-dropdown trigger="hover" @select="avatarSelect" :options="avatarOptions">
+        <n-dropdown
+          trigger="hover"
+          @select="avatarSelect"
+          :options="avatarOptions"
+        >
           <div class="avatar">
             <n-avatar round>
               {{ username }}
@@ -111,10 +143,16 @@
         </n-dropdown>
       </div>
       <!--设置-->
-      <div class="layout-header-trigger layout-header-trigger-min" @click="openSetting">
+      <div
+        class="layout-header-trigger layout-header-trigger-min"
+        @click="openSetting"
+      >
         <n-tooltip placement="bottom-end">
           <template #trigger>
-            <n-icon size="18" style="font-weight: bold">
+            <n-icon
+              size="18"
+              style="font-weight: bold"
+            >
               <SettingOutlined />
             </n-icon>
           </template>
@@ -128,20 +166,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs, ref, computed, unref } from 'vue';
-  import { useRouter, useRoute } from 'vue-router';
-  import components from './components';
-  import { NDialogProvider, useDialog, useMessage } from 'naive-ui';
-  import { TABS_ROUTES } from '@/store/mutation-types';
-  import { useUserStore } from '@/store/modules/user';
-  import { useScreenLockStore } from '@/store/modules/screenLock';
-  import ProjectSetting from './ProjectSetting.vue';
-  import { AsideMenu } from '@/layout/components/Menu';
-  import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
-  import { websiteConfig } from '@/config/website.config';
+  import { defineComponent, reactive, toRefs, ref, computed, unref } from "vue";
+  import { useRouter, useRoute } from "vue-router";
+  import components from "./components";
+  import { NDialogProvider, useDialog, useMessage } from "naive-ui";
+  import { TABS_ROUTES } from "@/store/mutation-types";
+  import { useUserStore } from "@/store/modules/user";
+  import { useScreenLockStore } from "@/store/modules/screenLock";
+  import ProjectSetting from "./ProjectSetting.vue";
+  import { AsideMenu } from "@/layout/components/Menu";
+  import { useProjectSetting } from "@/hooks/setting/useProjectSetting";
+  import { websiteConfig } from "@/config/website.config";
 
   export default defineComponent({
-    name: 'PageHeader',
+    name: "PageHeader",
     components: { ...components, NDialogProvider, ProjectSetting, AsideMenu },
     props: {
       collapsed: {
@@ -163,8 +201,8 @@
       const drawerSetting = ref();
 
       const state = reactive({
-        username: name ?? '',
-        fullscreenIcon: 'FullscreenOutlined',
+        username: name ?? "",
+        fullscreenIcon: "FullscreenOutlined",
         navMode,
         navTheme,
         headerSetting,
@@ -172,7 +210,7 @@
       });
 
       const getInverted = computed(() => {
-        return ['light', 'header-dark'].includes(unref(navTheme))
+        return ["light", "header-dark"].includes(unref(navTheme))
           ? props.inverted
           : !props.inverted;
       });
@@ -191,7 +229,7 @@
       });
 
       const getMenuLocation = computed(() => {
-        return 'header';
+        return "header";
       });
 
       const router = useRouter();
@@ -203,7 +241,7 @@
             ...item,
             label: item.meta.title,
             key: item.name,
-            disabled: item.path === '/',
+            disabled: item.path === "/",
           };
           // 是否有子菜单，并递归处理
           if (item.children && item.children.length > 0) {
@@ -224,26 +262,27 @@
 
       // 刷新页面
       const reloadPage = () => {
+        console.log(unref(route));
         router.push({
-          path: '/redirect' + unref(route).fullPath,
+          path: "/redirect" + unref(route).fullPath,
         });
       };
 
       // 退出登录
       const doLogout = () => {
         dialog.info({
-          title: '提示',
-          content: '您确定要退出登录吗',
-          positiveText: '确定',
-          negativeText: '取消',
+          title: "提示",
+          content: "您确定要退出登录吗",
+          positiveText: "确定",
+          negativeText: "取消",
           onPositiveClick: () => {
             userStore.logout().then(() => {
-              message.success('成功退出登录');
+              message.success("成功退出登录");
               // 移除标签页
               localStorage.removeItem(TABS_ROUTES);
               router
                 .replace({
-                  name: 'Login',
+                  name: "Login",
                   query: {
                     redirect: route.fullPath,
                   },
@@ -258,10 +297,10 @@
       // 切换全屏图标
       const toggleFullscreenIcon = () =>
         (state.fullscreenIcon =
-          document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined');
+          document.fullscreenElement !== null ? "FullscreenExitOutlined" : "FullscreenOutlined");
 
       // 监听全屏切换事件
-      document.addEventListener('fullscreenchange', toggleFullscreenIcon);
+      document.addEventListener("fullscreenchange", toggleFullscreenIcon);
 
       // 全屏切换
       const toggleFullScreen = () => {
@@ -277,19 +316,19 @@
       // 图标列表
       const iconList = [
         {
-          icon: 'SearchOutlined',
-          tips: '搜索',
+          icon: "SearchOutlined",
+          tips: "搜索",
         },
         {
-          icon: 'GithubOutlined',
-          tips: 'github',
+          icon: "GithubOutlined",
+          tips: "github",
           eventObject: {
-            click: () => window.open('https://github.com/jekip/naive-ui-admin'),
+            click: () => window.open("https://github.com/jekip/naive-ui-admin"),
           },
         },
         {
-          icon: 'LockOutlined',
-          tips: '锁屏',
+          icon: "LockOutlined",
+          tips: "锁屏",
           eventObject: {
             click: () => useLockscreen.setLock(true),
           },
@@ -297,11 +336,11 @@
       ];
       const avatarOptions = [
         {
-          label: '个人设置',
+          label: "个人设置",
           key: 1,
         },
         {
-          label: '退出登录',
+          label: "退出登录",
           key: 2,
         },
       ];
@@ -310,7 +349,7 @@
       const avatarSelect = (key) => {
         switch (key) {
           case 1:
-            router.push({ name: 'Setting' });
+            router.push({ name: "Setting" });
             break;
           case 2:
             doLogout();

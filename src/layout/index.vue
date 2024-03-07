@@ -1,5 +1,9 @@
 <template>
-  <n-layout class="layout" :position="fixedMenu" has-sider>
+  <n-layout
+    class="layout"
+    :position="fixedMenu"
+    has-sider
+  >
     <n-layout-sider
       v-if="
         !isMobile && isMixMenuNoneSub && (navMode === 'vertical' || navMode === 'horizontal-mix')
@@ -17,7 +21,10 @@
       class="layout-sider"
     >
       <Logo :collapsed="collapsed" />
-      <AsideMenu v-model:collapsed="collapsed" v-model:location="getMenuLocation" />
+      <AsideMenu
+        v-model:collapsed="collapsed"
+        v-model:location="getMenuLocation"
+      />
     </n-layout-sider>
 
     <n-drawer
@@ -40,8 +47,14 @@
     </n-drawer>
 
     <n-layout :inverted="inverted">
-      <n-layout-header :inverted="getHeaderInverted" :position="fixedHeader">
-        <PageHeader v-model:collapsed="collapsed" :inverted="inverted" />
+      <n-layout-header
+        :inverted="getHeaderInverted"
+        :position="fixedHeader"
+      >
+        <PageHeader
+          v-model:collapsed="collapsed"
+          :inverted="inverted"
+        />
       </n-layout-header>
 
       <n-layout-content
@@ -55,7 +68,10 @@
             'fluid-header': fixedHeader === 'static',
           }"
         >
-          <TabsView v-if="isMultiTabs" v-model:collapsed="collapsed" />
+          <TabsView
+            v-if="isMultiTabs"
+            v-model:collapsed="collapsed"
+          />
           <div
             class="main-view"
             :class="{
@@ -78,16 +94,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, unref, computed, onMounted } from 'vue';
-  import { Logo } from './components/Logo';
-  import { TabsView } from './components/TagsView';
-  import { MainView } from './components/Main';
-  import { AsideMenu } from './components/Menu';
-  import { PageHeader } from './components/Header';
-  import { useProjectSetting } from '@/hooks/setting/useProjectSetting';
-  import { useDesignSetting } from '@/hooks/setting/useDesignSetting';
-  import { useRoute } from 'vue-router';
-  import { useProjectSettingStore } from '@/store/modules/projectSetting';
+  import { ref, unref, computed, onMounted } from "vue";
+  import { Logo } from "./components/Logo";
+  import { TabsView } from "./components/TagsView";
+  import { MainView } from "./components/Main";
+  import { AsideMenu } from "./components/Menu";
+  import { PageHeader } from "./components/Header";
+  import { useProjectSetting } from "@/hooks/setting/useProjectSetting";
+  import { useDesignSetting } from "@/hooks/setting/useDesignSetting";
+  import { useRoute } from "vue-router";
+  import { useProjectSettingStore } from "@/store/modules/projectSetting";
 
   const { getDarkTheme } = useDesignSetting();
   const {
@@ -112,14 +128,14 @@
 
   const fixedHeader = computed(() => {
     const { fixed } = unref(headerSetting);
-    return fixed ? 'absolute' : 'static';
+    return fixed ? "absolute" : "static";
   });
 
   const isMixMenuNoneSub = computed(() => {
     const mixMenu = unref(menuSetting).mixMenu;
     const currentRoute = useRoute();
-    if (unref(navMode) != 'horizontal-mix') return true;
-    if (unref(navMode) === 'horizontal-mix' && mixMenu && currentRoute.meta.isRoot) {
+    if (unref(navMode) != "horizontal-mix") return true;
+    if (unref(navMode) === "horizontal-mix" && mixMenu && currentRoute.meta.isRoot) {
       return false;
     }
     return true;
@@ -127,7 +143,7 @@
 
   const fixedMenu = computed(() => {
     const { fixed } = unref(headerSetting);
-    return fixed ? 'absolute' : 'static';
+    return fixed ? "absolute" : "static";
   });
 
   const isMultiTabs = computed(() => {
@@ -139,11 +155,11 @@
   });
 
   const inverted = computed(() => {
-    return ['dark', 'header-dark'].includes(unref(navTheme));
+    return ["dark", "header-dark"].includes(unref(navTheme));
   });
 
   const getHeaderInverted = computed(() => {
-    return ['light', 'header-dark'].includes(unref(navTheme)) ? unref(inverted) : !unref(inverted);
+    return ["light", "header-dark"].includes(unref(navTheme)) ? unref(inverted) : !unref(inverted);
   });
 
   const leftMenuWidth = computed(() => {
@@ -152,7 +168,7 @@
   });
 
   const getMenuLocation = computed(() => {
-    return 'left';
+    return "left";
   });
 
   // 控制显示或隐藏移动端侧边栏
@@ -182,7 +198,7 @@
 
   onMounted(() => {
     checkMobileMode();
-    window.addEventListener('resize', watchWidth);
+    window.addEventListener("resize", watchWidth);
   });
 </script>
 
