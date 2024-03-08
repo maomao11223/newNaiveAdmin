@@ -11,6 +11,7 @@
     "bootstrap": "pnpm install",
     "serve": "pnpm run dev",
     "dev": "vite",
+    "test": "vite production",
     "build": "vite build && esno ./build/script/postBuild.ts",
     "build:no-cache": "pnpm clean:cache && npm run build",
     "report": "cross-env REPORT=true npm run build",

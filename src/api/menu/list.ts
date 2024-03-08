@@ -1,5 +1,7 @@
 import { http } from "@/utils/http/axios";
+import { getAppEnvConfig } from "@/utils/env";
 
+const { VITE_GLOB_API_URL } = getAppEnvConfig();
 //获取table
 export function findApi(params) {
   return http.request({
@@ -50,10 +52,10 @@ export function downloadApi(params) {
     }
   );
 }
-export function uploadApi(params) {
+export function uploadApi({ params, storeId }) {
   return http.uploadFile(
     {
-      url: "/Menu/Upload",
+      url: `${VITE_GLOB_API_URL}/Menu/Upload?storeId=${storeId}`,
       method: "post",
     },
     params

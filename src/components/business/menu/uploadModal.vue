@@ -86,8 +86,11 @@
       }
 
       await uploadApi({
-        data: { storeId: modalFormParams.value.storeId },
-        file: modalFormParams.value.file,
+        storeId: modalFormParams.value.storeId,
+        params: {
+          file: modalFormParams.value.file.file,
+          filename: modalFormParams.value.file.name,
+        },
       });
       resetForm();
       window["$message"].success("成功");

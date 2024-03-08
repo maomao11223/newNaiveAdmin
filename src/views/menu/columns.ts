@@ -28,7 +28,7 @@ export const columns: BasicColumn<ListData>[] = [
   {
     title: "ItemSizes",
     key: "ItemSizes",
-    width: 300,
+    width: 200,
     render(row) {
       // console.log("🚀 ~ row:", row);
       const tags = row.ItemSizes.map((targetKey) => {
@@ -52,33 +52,33 @@ export const columns: BasicColumn<ListData>[] = [
       return tags;
     },
   },
-  {
-    title: "ItemCustoms",
-    key: "ItemCustoms",
+  // {
+  //   title: "ItemCustoms",
+  //   key: "ItemCustoms",
 
-    render(row) {
-      // console.log("🚀 ~ row:", row);
-      const tags = row.ItemCustoms.map((targetKey) => {
-        // console.log("🚀 ~ targetKey:", targetKey);
-        return h(
-          NTag,
-          {
-            style: {
-              marginRight: "6px",
-            },
-            type: "success",
-          },
-          {
-            default: () => {
-              // console.log(targetKey);
-              return `${targetKey.OptionItems}`;
-            },
-          }
-        );
-      });
-      return tags;
-    },
-  },
+  //   render(row) {
+  //     // console.log("🚀 ~ row:", row);
+  //     const tags = row.ItemCustoms.map((targetKey) => {
+  //       // console.log("🚀 ~ targetKey:", targetKey);
+  //       return h(
+  //         NTag,
+  //         {
+  //           style: {
+  //             marginRight: "6px",
+  //           },
+  //           type: "success",
+  //         },
+  //         {
+  //           default: () => {
+  //             // console.log(targetKey);
+  //             return `${targetKey.OptionItems}`;
+  //           },
+  //         }
+  //       );
+  //     });
+  //     return tags;
+  //   },
+  // },
   {
     title: "ItemAdds",
     key: "ItemAdds",
